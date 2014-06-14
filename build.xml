@@ -1,0 +1,10 @@
+<project name="SampleProject" default="clean" basedir=".">
+    <description>
+        simple example build file
+    </description>
+    <target name="clean"
+            description="clean up" >
+        <!-- Delete the ${build} and ${dist} directory trees -->
+
+    </target>
+</project>
