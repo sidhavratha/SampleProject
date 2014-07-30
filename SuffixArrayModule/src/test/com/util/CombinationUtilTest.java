@@ -1,3 +1,5 @@
+package com.util;
+
 import com.util.*;
 import org.junit.Test;
 
