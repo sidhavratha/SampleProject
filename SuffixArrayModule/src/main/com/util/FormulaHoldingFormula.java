@@ -12,7 +12,7 @@ public class FormulaHoldingFormula implements Formula
     }
 
     @Override
-    public int evaluate(Object day1, Object day2) {
+    public double evaluate(Object day1, Object day2) {
         return formula.evaluate(day1, day2);
     }
 }

@@ -15,7 +15,7 @@ public class SelectorFormula<T> implements Formula<T>
     }
 
     @Override
-    public int evaluate(T day1, T day2) {
+    public double evaluate(T day1, T day2) {
         if(side == Side.LEFT)
         {
             return selector.valueOf(day1);

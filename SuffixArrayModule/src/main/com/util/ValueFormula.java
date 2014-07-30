@@ -11,7 +11,7 @@ public class ValueFormula implements Formula
         this.value = value;
     }
     @Override
-    public int evaluate(Object day1, Object day2) {
+    public double evaluate(Object day1, Object day2) {
         return value;
     }
 }

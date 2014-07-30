@@ -16,6 +16,33 @@ public class CombinationUtilTest {
     @Test
     public void testCombinationUtil()
     {
+        /*
+        10	20	30
+        20	20	20
+
+
+        R() = 6000
+        R(0) = 12000 + (12000*16000/18000)(10666.67) + (12000*10666.7/16000)(8000) = 30666.67
+        R(1) = 6000 + (6000*16000/18000)(5333.33) + (6000*5333.3/10000)(3200) = 14533.32
+        R(2) = 4000 + (4000*10666.7/16000)(2666.67) + (4000*5333.3/10000)(2133.3) = 8799.97
+        R(0,1) = 12000 + (4000) = 16000
+        R(0,2) = 8000 + (8000/3) = 10666.7
+        R(1,2) = 4000 + (4000/3)(1333.3) = 5333.3
+        R(1,2,3) = 8000
+
+
+        10,20
+        30,20
+
+        R() = 200 + ()
+        R(0) = 600 + (150*3) = 1050
+        R(1) = 200 + (150) = 350
+        R(0,1) = 600
+
+
+
+         */
+
         String[] data1 = new String[]{"10","20","30"};
         String[] data2 = new String[]{"30","40","50"};
         String[] dataDelta = new String[data1.length];
@@ -30,8 +57,7 @@ public class CombinationUtilTest {
         Function<String[], Integer>[] selectors = new Function[]{
                 new IndexBasedStringToIntSelector(0),
                 new IndexBasedStringToIntSelector(1)};
-        */
-
+*/
         for(int i=0;i<data1.length;i++)
         {
             dataDelta[i] = String.valueOf(Integer.valueOf(data2[i])-Integer.valueOf(data1[i]));
@@ -100,21 +126,24 @@ public class CombinationUtilTest {
 
                 for(Pair<Indices, Indices> prevIndices : allPrevIndicesElligibleForAttribution)
                 {
-                    valueContainer.put(prevIndices.getLeft(),
+                    Formula oldFormula = valueContainer.get(prevIndices.getLeft());
+                    Formula newFormula = new OperatorFormula(
+                            valueContainer.get(prevIndices.getLeft()),
+                            Operators.ADD_OPERATOR,
                             new OperatorFormula(
-                                    valueContainer.get(prevIndices.getLeft()),
-                                    Operators.ADD_OPERATOR,
+                                    valueContainer.get(currentCombinationPair.getLeft()),
+                                    Operators.MULTIPLY_OPERATOR,
                                     new OperatorFormula(
-                                            valueContainer.get(currentCombinationPair.getLeft()),
-                                            Operators.MULTIPLY_OPERATOR,
-                                            new OperatorFormula(
-                                                    valueContainer.get(prevIndices.getLeft()),
-                                                    Operators.DIVIDE_OPERATOR,
-                                                    sumOfAll
-                                            )
+                                            valueContainer.get(prevIndices.getLeft()),
+                                            Operators.DIVIDE_OPERATOR,
+                                            sumOfAll
                                     )
                             )
                     );
+
+                    System.out.println(CombinationUtil.print(prevIndices.getLeft().getIndices())+"Old/New formula : " + oldFormula.evaluate(dataDelta, data1)+"/"+newFormula.evaluate(dataDelta, data1));
+
+                    valueContainer.put(prevIndices.getLeft(),newFormula);
                 }
             }
 

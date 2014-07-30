@@ -16,7 +16,7 @@ public class OperatorFormula implements Formula
     }
 
     @Override
-    public int evaluate(Object day1, Object day2) {
+    public double evaluate(Object day1, Object day2) {
         return op.apply(left.evaluate(day1, day2), right.evaluate(day1, day2));
     }
 }

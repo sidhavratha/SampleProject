@@ -5,5 +5,5 @@ package com.util;
 */
 public interface Formula<T>
 {
-    public int evaluate(T day1, T day2);
+    public double evaluate(T day1, T day2);
 }
